@@ -102,13 +102,8 @@ def _fetch_via_graphql(shortcode: str, session: requests.Session) -> dict | None
 
 # ── Method 2: oEmbed API (no auth needed) ─────────────────────────────────
 def _fetch_via_oembed(post_url: str, session: requests.Session) -> dict | None:
-    """Instagram oEmbed — publicly available, no login"""
-    oembed_url = (
-        f"https://graph.facebook.com/v18.0/instagram_oembed"
-        f"?url={post_url}&maxwidth=320&fields=thumbnail_url,author_name,title"
-        f"&access_token=2104280716UPDATE|PLACEHOLDER"
-    )
-    # Public oEmbed (no token needed for basic)
+    """Instagram oEmbed — publicly available, no login needed"""
+    # Using public Instagram oEmbed endpoint (no token required)
     public_oembed = f"https://www.instagram.com/oembed/?url={post_url}"
     try:
         r = session.get(public_oembed, timeout=10)
